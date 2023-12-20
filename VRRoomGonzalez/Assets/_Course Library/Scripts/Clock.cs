@@ -5,43 +5,56 @@ using UnityEngine;
 
 public class Clock : MonoBehaviour
 {
+    [SerializeField]
+    private Transform _secondHand;
+    [SerializeField]
+    private Transform _minuteHand;
+    [SerializeField]
+    private Transform _hourHand;
 
-    private const float
-      hoursToDegrees = 360f / 12f,
-      minutesToDegrees = 360f / 60f,
-      secondsToDegrees = 360f / 60f;
+    private int _previousSeconds;
+    private int _timeInSeconds;
 
-    public Transform hours, minutes, seconds;
 
-    public bool analog;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
-
-        if (analog)
-        {
-            DateTime time = DateTime.Now;
-            TimeSpan timespan = DateTime.Now.TimeOfDay;
-            hours.localRotation =
-                Quaternion.Euler((float)timespan.TotalHours * hoursToDegrees, 0f, 0f);
-            minutes.localRotation =
-                Quaternion.Euler((float)timespan.TotalMinutes * minutesToDegrees, 0f, 0f);
-            seconds.localRotation =
-                Quaternion.Euler((float)timespan.TotalSeconds * secondsToDegrees, 0f, 0f);
-        }
-        else
-        {
-            DateTime time = DateTime.Now;
-            hours.localRotation = Quaternion.Euler(time.Hour * hoursToDegrees, 0f, 0f);
-            minutes.localRotation = Quaternion.Euler(time.Minute * minutesToDegrees, 0f, 0f);
-            seconds.localRotation = Quaternion.Euler(time.Second * secondsToDegrees, 0f, 0f);
-        }
+        ConvertTimeToSeconds();
+        RotateClockHands();
     }
+
+   private int ConvertTimeToSeconds()
+    {
+        int currentSeconds = DateTime.Now.Second;
+        int currentMinute = DateTime.Now.Minute;
+        int currentHour = DateTime.Now.Hour;
+
+        if (currentHour >= 12)
+        {
+            currentHour -= 12;
+        }
+
+        _timeInSeconds += currentSeconds + (currentMinute * 60) + (currentHour * 60 * 60);
+
+        return _timeInSeconds;
+    }
+
+    void RotateClockHands()
+    {
+        float secondhandPerSecond = 360f / 60f;
+        float minutehandPerSecond = 360f / (60f * 60f);
+        float hourhandPerSecond = 360f / (60f * 60f * 12f);
+
+        if (_timeInSeconds != _previousSeconds)
+        {
+            Debug.Log(_timeInSeconds);
+            _secondHand.localRotation = Quaternion.Euler(_timeInSeconds * secondhandPerSecond, 0, 0);
+            _minuteHand.localRotation = Quaternion.Euler(_timeInSeconds * minutehandPerSecond, 0, 0);
+            _hourHand.localRotation = Quaternion.Euler(_timeInSeconds * hourhandPerSecond, 0, 0);
+        }
+        _previousSeconds = _timeInSeconds;
+    }
+  
+
+
+
 }

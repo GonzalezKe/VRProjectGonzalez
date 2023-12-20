@@ -2486,7 +2486,7 @@ PrefabInstance:
     - target: {fileID: 1915742297380584313, guid: 278cd79b6d0575544a70c9035c7a440e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.669
+      value: 0.672
       objectReference: {fileID: 0}
     - target: {fileID: 1915742297380584313, guid: 278cd79b6d0575544a70c9035c7a440e,
         type: 3}
@@ -2526,7 +2526,7 @@ PrefabInstance:
     - target: {fileID: 9088937991799805483, guid: 278cd79b6d0575544a70c9035c7a440e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.000007726059
+      value: -0.0028
       objectReference: {fileID: 0}
     - target: {fileID: 9088937991799805483, guid: 278cd79b6d0575544a70c9035c7a440e,
         type: 3}
@@ -2536,7 +2536,7 @@ PrefabInstance:
     - target: {fileID: 9088937991799805483, guid: 278cd79b6d0575544a70c9035c7a440e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.00037322607
+      value: -0.0005
       objectReference: {fileID: 0}
     - target: {fileID: 9088937991799805483, guid: 278cd79b6d0575544a70c9035c7a440e,
         type: 3}
@@ -2595,10 +2595,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb894760dc15ff040842d01a2a0141c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hours: {fileID: 110494110}
-  minutes: {fileID: 1675107884}
-  seconds: {fileID: 1873692435}
-  analog: 1
+  _secondHand: {fileID: 1873692435}
+  _minuteHand: {fileID: 1675107884}
+  _hourHand: {fileID: 110494110}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
